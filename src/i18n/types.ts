@@ -130,12 +130,16 @@ export interface LocaleStrings {
     pluginintegrations: string;
     backgrounds: string;
     text: string;
+    navigation: string;
+    links: string;
+    editor: string;
     interactive: string;
     ui: string;
     misc: string;
     graph: string;
     markdown: string;
     notices: string;
+    canvas: string;
     custom: string;
     customDesc: string;
     helpTextPre: string;

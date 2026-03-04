@@ -115,12 +115,16 @@
     pluginintegrations: 'Intégrations de plugins',
     backgrounds: 'Arrière-plans',
     text: 'Texte',
+    navigation: 'Navigation',
+    links: 'Liens',
+    editor: 'Éditeur',
     interactive: 'Éléments Interactifs',
     ui: "Éléments d'Interface",
     misc: 'Divers',
     graph: 'Vue Graphique',
     markdown: 'Markdown',
     notices: 'Notifications',
+    canvas: 'Canvas',
     custom: 'Variables personnalisées',
     customDesc: "Variable ajoutée par l'utilisateur.",
     helpTextPre: 'Vous ne trouvez pas la variable que vous cherchez ? ',
@@ -474,6 +478,26 @@
       '--tag-color': 'Texte des tags',
       '--tag-color-hover': 'Texte des tags (Survol)',
       '--tag-bg': 'Fond des tags',
+      // Navigation
+      '--nav-item-color': 'Texte des éléments de navigation',
+      '--nav-item-color-hover': 'Texte des éléments de navigation (Survol)',
+      '--nav-item-color-active': 'Texte des éléments de navigation (Actif)',
+      '--nav-item-background-hover': 'Fond des éléments de navigation (Survol)',
+      '--nav-item-background-active': 'Fond des éléments de navigation (Actif)',
+      // Links
+      '--link-color': 'Couleur des liens',
+      '--link-color-hover': 'Couleur des liens (Survol)',
+      '--link-external-color': 'Couleur des liens externes',
+      '--link-external-color-hover': 'Couleur des liens externes (Survol)',
+      '--link-unresolved-color': 'Couleur des liens non résolus',
+      // Editor
+      '--caret-color': 'Couleur du curseur de texte',
+      '--code-comment': 'Commentaire de code',
+      '--code-function': 'Fonction de code',
+      '--code-keyword': 'Mot-clé de code',
+      '--code-operator': 'Opérateur de code',
+      '--code-property': 'Propriété de code',
+      '--code-string': 'Chaîne de code',
       // Headings
       '--h1-color': 'Couleur H1',
       '--h2-color': 'Couleur H2',
@@ -489,6 +513,24 @@
       '--code-normal': 'Texte de code en ligne',
       '--code-background': 'Fond de code en ligne',
       '--text-highlight-bg': 'Fond de texte surligné',
+      '--table-background': 'Fond du tableau',
+      '--table-border-color': 'Bordure du tableau',
+      '--table-header-background': "Fond de l'en-tête du tableau",
+      '--table-row-alt-background': 'Fond des lignes alternées du tableau',
+      '--callout-default': 'Callout par défaut',
+      '--callout-info': 'Callout info',
+      '--callout-warning': 'Callout avertissement',
+      '--callout-error': 'Callout erreur / danger',
+      '--callout-success': 'Callout succès',
+      '--callout-tip': 'Callout astuce',
+      '--callout-question': 'Callout question',
+      '--callout-important': 'Callout important',
+      '--callout-bug': 'Callout bug',
+      '--callout-example': 'Callout exemple',
+      '--callout-quote': 'Callout citation',
+      '--callout-todo': 'Callout todo',
+      '--callout-summary': 'Callout résumé',
+      '--callout-fail': 'Callout échec',
       // Interactive Elements
       '--interactive-normal': 'Interactif Normal',
       '--interactive-hover': 'Interactif (Survol)',
@@ -506,6 +548,10 @@
       '--header-background': "Fond de l'en-tête",
       '--header-border-color': "Bordure de l'en-tête",
       '--vault-name-color': 'Nom du coffre',
+      '--tab-background-active': "Fond de l'onglet actif",
+      '--tab-text-color': "Texte de l'onglet",
+      '--tab-text-color-active': "Texte de l'onglet actif",
+      '--workspace-background-translucent': 'Fond translucide de l’espace de travail',
       // Notices
       '--cm-notice-text-default': 'Texte de notification par défaut',
       '--cm-notice-bg-default': 'Fond de notification par défaut',
@@ -517,8 +563,13 @@
       '--graph-node-focused': 'Nœud focalisé',
       '--graph-node-tag': 'Nœud de tag',
       '--graph-node-attachment': 'Nœud de pièce jointe',
+      // Canvas
+      '--canvas-background': 'Fond du canvas',
+      '--canvas-card-label-color': 'Étiquette des cartes canvas',
+      '--canvas-dot-pattern': 'Motif de points du canvas',
       // Misc
       '--scrollbar-thumb-bg': 'Curseur de la barre de défilement',
+      '--scrollbar-active-thumb-bg': 'Curseur actif de la barre de défilement',
       '--scrollbar-bg': 'Fond de la barre de défilement',
       '--divider-color': 'Séparateur',
     },
@@ -566,6 +617,30 @@
       '--tag-color': 'Définit la couleur du texte des #tags.',
       '--tag-color-hover': 'Définit la couleur du texte des #tags lors du survol.',
       '--tag-bg': "Définit la couleur de fond des #tags, permettant une forme de 'pilule'.",
+      // Navigation
+      '--nav-item-color':
+        'Couleur de texte par défaut des éléments de navigation (explorateur de fichiers, recherche, etc.).',
+      '--nav-item-color-hover': 'Couleur du texte des éléments de navigation au survol.',
+      '--nav-item-color-active': "Couleur du texte de l'élément de navigation actif.",
+      '--nav-item-background-hover': 'Couleur de fond des éléments de navigation au survol.',
+      '--nav-item-background-active': "Couleur de fond de l'élément de navigation actif.",
+      // Links
+      '--link-color': 'Couleur par défaut des liens markdown internes.',
+      '--link-color-hover': 'Couleur des liens markdown internes au survol.',
+      '--link-external-color': 'Couleur par défaut des liens externes.',
+      '--link-external-color-hover': 'Couleur des liens externes au survol.',
+      '--link-unresolved-color':
+        "Couleur des liens qui pointent vers des notes qui n'existent pas encore.",
+      // Editor
+      '--caret-color': "Couleur du curseur de texte en mode d'édition.",
+      '--code-comment': 'Couleur de syntaxe pour les commentaires dans les blocs de code.',
+      '--code-function': 'Couleur de syntaxe pour les noms de fonctions dans les blocs de code.',
+      '--code-keyword':
+        'Couleur de syntaxe pour les mots-clés du langage (if, const, return, etc.).',
+      '--code-operator': 'Couleur de syntaxe pour les opérateurs dans les blocs de code.',
+      '--code-property':
+        'Couleur de syntaxe pour les noms de propriétés/objets dans les blocs de code.',
+      '--code-string': 'Couleur de syntaxe pour les chaînes de caractères dans les blocs de code.',
       // Headings
       '--h1-color': 'La couleur du texte des titres H1.',
       '--h2-color': 'La couleur du texte des titres H2.',
@@ -583,6 +658,27 @@
         "Définit la couleur du texte à l'intérieur du code en ligne (entre apostrophes inverses).",
       '--code-background': 'Définit la couleur de fond pour les blocs de code en ligne.',
       '--text-highlight-bg': 'Définit la couleur de fond pour le texte surligné (==comme ceci==).',
+      '--table-background': 'Couleur de fond des tableaux markdown.',
+      '--table-border-color': 'Couleur des bordures des cellules de tableau markdown.',
+      '--table-header-background': 'Couleur de fond de la ligne d’en-tête des tableaux markdown.',
+      '--table-row-alt-background':
+        'Couleur de fond alternée des lignes dans les tableaux markdown.',
+      '--callout-default': 'Couleur RGB de base utilisée par les callouts [!note].',
+      '--callout-info': 'Couleur RGB de base utilisée par les callouts [!info].',
+      '--callout-warning': 'Couleur RGB de base utilisée par les callouts [!warning].',
+      '--callout-error': 'Couleur RGB de base utilisée par les callouts [!error] / [!danger].',
+      '--callout-success': 'Couleur RGB de base utilisée par les callouts [!success].',
+      '--callout-tip': 'Couleur RGB de base utilisée par les callouts [!tip] / [!hint].',
+      '--callout-question':
+        'Couleur RGB de base utilisée par les callouts [!question] / [!help] / [!faq].',
+      '--callout-important': 'Couleur RGB de base utilisée par les callouts [!important].',
+      '--callout-bug': 'Couleur RGB de base utilisée par les callouts [!bug].',
+      '--callout-example': 'Couleur RGB de base utilisée par les callouts [!example].',
+      '--callout-quote': 'Couleur RGB de base utilisée par les callouts [!quote] / [!cite].',
+      '--callout-todo': 'Couleur RGB de base utilisée par les callouts [!todo].',
+      '--callout-summary': 'Couleur RGB de base utilisée par les callouts [!summary].',
+      '--callout-fail':
+        'Couleur RGB de base utilisée par les callouts [!fail] / [!failure] / [!missing].',
       // Interactive Elements
       '--interactive-normal': 'La couleur de fond pour les éléments interactifs comme les boutons.',
       '--interactive-hover': 'La couleur de fond pour les éléments interactifs lors du survol.',
@@ -604,6 +700,11 @@
         "L'arrière-plan pour les en-têtes dans les volets (par exemple, l'en-tête du titre de la note).",
       '--header-border-color': 'La couleur de la bordure sous les en-têtes de volet.',
       '--vault-name-color': 'La couleur du nom de votre coffre dans le coin supérieur gauche.',
+      '--tab-background-active': "La couleur de fond de l'onglet actif.",
+      '--tab-text-color': 'La couleur du texte des onglets inactifs.',
+      '--tab-text-color-active': "La couleur du texte de l'onglet actif.",
+      '--workspace-background-translucent':
+        "La couleur de fond translucide utilisée derrière certaines superpositions de l'espace de travail.",
       '--cm-notice-text-default':
         'Définit la couleur de texte par défaut pour toutes les notifications, sauf si elle est remplacée par une règle.',
       '--cm-notice-bg-default':
@@ -619,8 +720,14 @@
         'Couleur des nœuds représentant les tags lorsque les tags sont affichés dans le graphique.',
       '--graph-node-attachment':
         'Couleur des nœuds représentant les pièces jointes (par exemple, image ou autres fichiers liés).',
+      // Canvas
+      '--canvas-background': "Couleur de fond de l'espace Canvas.",
+      '--canvas-card-label-color': 'Couleur du texte des étiquettes sur les cartes Canvas.',
+      '--canvas-dot-pattern': 'Couleur du motif de grille pointillée dans Canvas.',
       // Misc
       '--scrollbar-thumb-bg': 'La couleur de la partie déplaçable de la barre de défilement.',
+      '--scrollbar-active-thumb-bg':
+        'La couleur du curseur de la barre de défilement lorsqu’il est activement déplacé/pressé.',
       '--scrollbar-bg': "La couleur de la piste de la barre de défilement (l'arrière-plan).",
       '--divider-color':
         "La couleur pour les lignes de séparation générales de l'interface, comme les bordures entre les paramètres.",

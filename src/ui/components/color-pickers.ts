@@ -1,5 +1,5 @@
 import { Notice, Setting, SettingGroup } from 'obsidian';
-import { DEFAULT_VARS, TEXT_TO_BG_MAP } from '../../constants';
+import { DEFAULT_VARS, RGB_TRIPLET_VARS, TEXT_TO_BG_MAP } from '../../constants';
 import { t } from '../../i18n/strings';
 import {
   flattenVars,
@@ -9,6 +9,33 @@ import {
 } from '../../utils';
 import { IconizeSettingsModal, NoticeRulesModal } from '../modals';
 import type { ThemeEngineSettingTab } from '../settingsTab';
+
+const hexToRgbTriplet = (hex: string): string => {
+  const normalized = hex.trim().replace('#', '');
+  if (normalized.length !== 6) return hex;
+
+  const value = Number.parseInt(normalized, 16);
+  if (Number.isNaN(value)) return hex;
+
+  const r = (value >> 16) & 255;
+  const g = (value >> 8) & 255;
+  const b = value & 255;
+  return `${r}, ${g}, ${b}`;
+};
+
+function normalizeHexColor(value: string): string {
+  const trimmed = value.trim();
+
+  if (/^[0-9a-fA-F]{6}$/.test(trimmed)) {
+    return `#${trimmed.toLowerCase()}`;
+  }
+
+  if (/^[0-9a-fA-F]{3}$/.test(trimmed)) {
+    return `#${trimmed.toLowerCase()}`;
+  }
+
+  return value;
+}
 
 export function drawColorPickers(
   containerEl: HTMLElement,
@@ -163,7 +190,8 @@ export function drawColorPickers(
       settingTab.updateColorPickerAppearance(textInput, colorPicker);
 
       colorPicker.addEventListener('input', (e) => {
-        const newColor = (e.target as HTMLInputElement).value;
+        const pickedColor = (e.target as HTMLInputElement).value;
+        const newColor = RGB_TRIPLET_VARS.has(varName) ? hexToRgbTriplet(pickedColor) : pickedColor;
         textInput.value = newColor;
         if (plugin.settings.colorUpdateFPS > 0) {
           plugin.pendingVarUpdates[varName] = newColor;
@@ -171,8 +199,17 @@ export function drawColorPickers(
       });
 
       const handleFinalChange = (newColor: string) => {
+        if (!RGB_TRIPLET_VARS.has(varName)) {
+          newColor = normalizeHexColor(newColor);
+        }
+
+        const normalizedColor =
+          RGB_TRIPLET_VARS.has(varName) && newColor.trim().startsWith('#')
+            ? hexToRgbTriplet(newColor)
+            : newColor;
+
         // 1. Update visual state of inputs
-        textInput.value = newColor;
+        textInput.value = normalizedColor;
         settingTab.updateColorPickerAppearance(textInput, colorPicker);
 
         // 2. Get profile and old color (for history)
@@ -182,7 +219,7 @@ export function drawColorPickers(
           : defaultValue;
 
         // 3. Update history if change is meaningful
-        if (oldColor.toLowerCase() !== newColor.toLowerCase()) {
+        if (oldColor.toLowerCase() !== normalizedColor.toLowerCase()) {
           profile.history = profile.history || {};
           profile.history[varName] = profile.history[varName] || [];
           profile.history[varName].unshift(oldColor);
@@ -190,7 +227,10 @@ export function drawColorPickers(
         }
 
         // 4. Decide UI state (Pristine/Modified) and update data
-        if (newColor.trim() === '' || newColor.toLowerCase() === defaultValue.toLowerCase()) {
+        if (
+          normalizedColor.trim() === '' ||
+          normalizedColor.toLowerCase() === defaultValue.toLowerCase()
+        ) {
           setting.settingEl.classList.remove('is-modified');
           setting.settingEl.classList.add('is-pristine');
           delete activeProfileVars[varName];
@@ -198,13 +238,14 @@ export function drawColorPickers(
           // If it's a new and custom color
           setting.settingEl.classList.remove('is-pristine');
           setting.settingEl.classList.add('is-modified');
-          activeProfileVars[varName] = newColor;
+          activeProfileVars[varName] = normalizedColor;
         }
         // 5. Apply changes and save
         const valueToApply =
-          newColor.trim() === '' || newColor.toLowerCase() === defaultValue.toLowerCase()
+          normalizedColor.trim() === '' ||
+          normalizedColor.toLowerCase() === defaultValue.toLowerCase()
             ? ''
-            : newColor;
+            : normalizedColor;
 
         if (plugin.settings.colorUpdateFPS === 0) {
           plugin.pendingVarUpdates[varName] = valueToApply;
@@ -218,6 +259,18 @@ export function drawColorPickers(
         settingTab.updateAccessibilityCheckers();
         setTimeout(() => settingTab.app.workspace.trigger('css-change'), 50);
       };
+
+      textInput.addEventListener('input', (e) => {
+        let newColor = (e.target as HTMLInputElement).value;
+
+        if (!RGB_TRIPLET_VARS.has(varName)) {
+          newColor = normalizeHexColor(newColor);
+        }
+
+        if (plugin.settings.colorUpdateFPS > 0) {
+          plugin.pendingVarUpdates[varName] = newColor;
+        }
+      });
 
       colorPicker.addEventListener('change', (e) => {
         handleFinalChange((e.target as HTMLInputElement).value);

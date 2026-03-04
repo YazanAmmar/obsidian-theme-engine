@@ -40,6 +40,22 @@ export class ThemeEngineSettingTab extends PluginSettingTab {
     if (value === 'transparent' || value === '') {
       colorPicker.classList.add('is-transparent');
       colorPicker.value = '#ffffff';
+    } else if (/^\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}$/.test(value)) {
+      colorPicker.classList.remove('is-transparent');
+
+      const [rRaw, gRaw, bRaw] = value.split(',').map((v) => Number.parseInt(v.trim(), 10));
+      const r = Math.min(255, Math.max(0, Number.isNaN(rRaw) ? 0 : rRaw));
+      const g = Math.min(255, Math.max(0, Number.isNaN(gRaw) ? 0 : gRaw));
+      const b = Math.min(255, Math.max(0, Number.isNaN(bRaw) ? 0 : bRaw));
+      const rgbHex = `#${[r, g, b]
+        .map((channel) => channel.toString(16).padStart(2, '0'))
+        .join('')}`;
+
+      try {
+        colorPicker.value = rgbHex;
+      } catch {
+        colorPicker.value = '#ffffff';
+      }
     } else if (value.startsWith('#') && (value.length === 9 || value.length === 5)) {
       colorPicker.classList.remove('is-transparent');
 
