@@ -202,7 +202,7 @@ The plugin comes with these hand-crafted profiles by default:
 
 ## Color Variable Reference
 
-Theme Engine exposes **104 core CSS variables** from Obsidian’s theme system.  
+Theme Engine exposes **105 core CSS variables** from Obsidian’s theme system.  
 These variables are grouped internally by category and can be edited visually through the plugin UI.
 
 Each entry below shows:
@@ -214,8 +214,6 @@ Each entry below shows:
 > [!TIP]  
 > Theme Engine also supports **custom CSS variables**.  
 > You can add variables from other plugins or themes directly from the **Custom Variables** section in the settings.
-
----
 
 <details> <summary><strong>Click to expand the full list of supported CSS variables</strong></summary>
 
@@ -383,7 +381,7 @@ If you want to customize the plugin or contribute to its development, you can ea
 >
 > The `npm run dev` command is currently configured with a personal path:
 >
-> `C:\Users\user\Documents\Obsidian\My Notes\\.obsidian\\plugins\\obsidian-theme-engine`
+> `C:\Users\user\Documents\Obsidian\My Notes\.obsidian\plugins\obsidian-theme-engine`
 >
 > You must edit the `dev` script inside the `package.json` file to point to your local vault's plugin folder before running this command.
 
