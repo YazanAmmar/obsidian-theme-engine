@@ -571,16 +571,16 @@ A: Yes, absolutely. The plugin fully supports **Arabic** (العَرَبيَّة
 MIT — see [LICENSE](https://github.com/YazanAmmar/obsidian-theme-engine/blob/main/LICENSE).
 
 > [!NOTE]
-> This license does not grant rights to use the project's name, logo, or branding.
+> This license does not grant rights to use the project's logo or visual identity.
 
 ---
 
 ## Trademark & Branding
 
-The "Obsidian Theme Engine" name, logo (phoenix emblem), and visual identity are protected.
+The official logo (phoenix emblem) and visual identity of this project are protected.
 
 - You may use, modify, and distribute the code under the MIT license
-- You may NOT use the official name or logo in forks, derivatives, or redistributed versions
+- You may NOT use the official logo or visual identity in forks, derivatives, or redistributed versions
 
 > For full trademark and branding rules, see [TRADEMARK.md](./TRADEMARK.md)
 
