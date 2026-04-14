@@ -402,7 +402,7 @@ export class LanguageTranslatorModal extends ThemeEngineBaseModal {
         if (match.index > lastIndex) {
           element.appendText(text.substring(lastIndex, match.index));
         }
-        element.createSpan({ cls: 'cm-search-match', text: match[0] });
+        element.createSpan({ cls: 'cm-theme-engine-search-match', text: match[0] });
 
         lastIndex = regex.lastIndex;
       }

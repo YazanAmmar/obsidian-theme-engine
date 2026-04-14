@@ -318,7 +318,7 @@ export const highlightRowMatches = (row: HTMLElement, state: SearchState): void 
         if (match.index > lastIndex) {
           element.appendText(originalText.substring(lastIndex, match.index));
         }
-        element.createSpan({ cls: 'cm-search-match', text: match[0] });
+        element.createSpan({ cls: 'cm-theme-engine-search-match', text: match[0] });
         lastIndex = regex.lastIndex;
       }
 

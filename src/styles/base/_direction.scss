@@ -1,6 +1,6 @@
 /* Global RTL override for notices */
 body.theme-engine-rtl {
-  .notice {
+  [data-cm-theme-engine-notice='true'] {
     direction: rtl;
     text-align: right;
   }

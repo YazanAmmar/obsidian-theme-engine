@@ -38,6 +38,7 @@ export const processNotice = (plugin: ThemeEngine, el: HTMLElement): void => {
   }
 
   el.dataset.cmProcessed = 'true';
+  el.dataset.cmThemeEngineNotice = 'true';
 
   try {
     const settings = plugin.settings;
@@ -96,7 +97,7 @@ export const processNotice = (plugin: ThemeEngine, el: HTMLElement): void => {
 
       const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
         acceptNode: (node) => {
-          return node.parentElement?.classList.contains('cm-keyword-highlight')
+          return node.parentElement?.classList.contains('cm-theme-engine-keyword-highlight')
             ? NodeFilter.FILTER_REJECT
             : NodeFilter.FILTER_ACCEPT;
         },
@@ -177,7 +178,7 @@ export const processNotice = (plugin: ThemeEngine, el: HTMLElement): void => {
             );
           }
           const span = document.createElement('span');
-          span.className = 'cm-keyword-highlight';
+          span.className = 'cm-theme-engine-keyword-highlight';
           span.setCssProps({ color: match.color });
           span.textContent = nodeContent.substring(match.start, match.end);
           fragments.appendChild(span);

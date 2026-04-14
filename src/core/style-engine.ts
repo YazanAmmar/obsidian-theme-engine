@@ -209,6 +209,8 @@ export const applyStyles = async (plugin: ThemeEngine): Promise<void> => {
     return;
   }
 
+  document.body.classList.add('theme-engine-overrides-active');
+
   const profileVars = Object.entries(profile.vars);
   if (profileVars.length > 0) {
     const cssString = `body.theme-dark, body.theme-light {
@@ -319,6 +321,7 @@ export const clearStyles = (plugin: ThemeEngine): void => {
     overrideStyleEl.remove();
   }
   plugin.app.workspace.trigger('css-change');
+  document.body.classList.remove('theme-engine-overrides-active');
   document.body.classList.remove('theme-engine-rtl');
   plugin._clearBackgroundMedia();
 };
