@@ -1,7 +1,6 @@
-import { App, ButtonComponent, Notice, requestUrl, Setting } from 'obsidian';
+import { App, ButtonComponent, Notice, debounce, requestUrl, Setting } from 'obsidian';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
-import { debounce } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 
@@ -167,20 +166,6 @@ export class BackgroundImageSettingsModal extends ThemeEngineBaseModal {
       console.error('Failed to save JPG quality:', err);
     });
   }, 0);
-
-  debounce(func: (...args: unknown[]) => void, wait: number) {
-    let timeout: ReturnType<typeof setTimeout> | null;
-    return (...args: unknown[]) => {
-      const later = () => {
-        timeout = null;
-        func(...args);
-      };
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      timeout = setTimeout(later, wait);
-    };
-  }
 
   onClose() {
     const { contentEl } = this;

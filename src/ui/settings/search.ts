@@ -1,8 +1,7 @@
-import { DropdownComponent, SearchComponent, setIcon } from 'obsidian';
+import { DropdownComponent, SearchComponent, debounce, setIcon } from 'obsidian';
 import { DEFAULT_VARS } from '../../constants';
 import { t } from '../../i18n/strings';
 import type { ThemeEngineSettingTab } from '../settingsTab';
-import { debounce } from '../../utils';
 
 export type SearchState = {
   query: string;

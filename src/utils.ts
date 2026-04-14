@@ -71,15 +71,6 @@ export function isIconizeEnabled(app: App): boolean {
   return isPluginEnabled(app, iconizeIDs);
 }
 
-// Standard debounce to limit function execution rate
-export function debounce(fn: (...args: unknown[]) => void, ms = 200) {
-  let t: ReturnType<typeof setTimeout> | null = null;
-  return (...args: unknown[]) => {
-    if (t) clearTimeout(t);
-    t = setTimeout(() => fn.apply(this, args), ms);
-  };
-}
-
 // Auto-increments filename if path exists (e.g., file-2.png)
 export async function findNextAvailablePath(adapter: DataAdapter, path: string): Promise<string> {
   if (!(await adapter.exists(path))) {

@@ -1,4 +1,4 @@
-import { ButtonComponent, Notice, Setting, SettingGroup, setIcon } from 'obsidian';
+import { ButtonComponent, Notice, Setting, SettingGroup, debounce, setIcon } from 'obsidian';
 import { CORE_LANGUAGES, LocaleCode } from '../../i18n/types';
 import { loadLanguage, t } from '../../i18n/strings';
 import type { ThemeEngineSettingTab } from '../settingsTab';
@@ -15,7 +15,6 @@ import {
   LanguageSettingsModal,
   LanguageTranslatorModal,
 } from '../modals';
-import { debounce } from '../../utils';
 
 export const renderSettingsTab = async (tab: ThemeEngineSettingTab): Promise<void> => {
   const themeDefaults = await tab.plugin.getThemeDefaults();

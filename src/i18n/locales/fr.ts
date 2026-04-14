@@ -62,7 +62,7 @@
     tooltipCopyJson: 'Copier le JSON du profil actuel dans le presse-papiers',
   },
   options: {
-    heading: 'Paramètres avancés',
+    heading: 'Options avancées',
     liveUpdateName: 'FPS de la mise à jour en direct',
     liveUpdateDesc:
       "Définit le nombre de fois par seconde où l'interface prévisualise les changements de couleur lors du glissement (0 = désactiver l'aperçu en direct). Des valeurs plus basses peuvent améliorer les performances.",
@@ -83,7 +83,7 @@
     resetPluginButton: 'Réinitialiser toutes les données...',
     backgroundName: 'Définir un arrière-plan personnalisé',
     backgroundDesc: "Gérer l'image ou la vidéo d'arrière-plan pour ce profil.",
-    backgroundModalSettingsTitle: "Paramètres d'arrière-plan",
+    backgroundModalSettingsTitle: "Options d'arrière-plan",
     backgroundEnableName: "Activer l'arrière-plan",
     backgroundEnableDesc:
       "Activer/désactiver la visibilité de l'arrière-plan personnalisé pour ce profil.",

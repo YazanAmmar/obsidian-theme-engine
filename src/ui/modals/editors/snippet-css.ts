@@ -1,8 +1,7 @@
-import { App, Notice, Setting, TextComponent, TextAreaComponent } from 'obsidian';
+import { App, Notice, Setting, TextComponent, TextAreaComponent, debounce } from 'obsidian';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
 import type { Snippet } from '../../../types';
-import { debounce } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 
@@ -24,14 +23,6 @@ export class SnippetCssModal extends ThemeEngineBaseModal {
   snippetName: string;
   isGlobalSnippet: boolean;
   isSaving: boolean = false;
-
-  _debounce(func: (...args: unknown[]) => void, delay: number) {
-    let timeout: number;
-    return (...args: unknown[]) => {
-      clearTimeout(timeout);
-      timeout = window.setTimeout(() => func.apply(this, args), delay);
-    };
-  }
 
   constructor(
     app: App,

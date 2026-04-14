@@ -62,7 +62,7 @@ export default {
     tooltipCopyJson: 'Copy current profile JSON to clipboard',
   },
   options: {
-    heading: 'Advanced settings',
+    heading: 'Advanced options',
     liveUpdateName: 'Live update fps',
     liveUpdateDesc:
       'Sets how many times per second the UI previews color changes while dragging (0 = disable live preview). Lower values can improve performance.',
@@ -84,7 +84,7 @@ export default {
     backgroundName: 'Set custom background',
     backgroundDesc: 'Manage the background image or video for this profile.',
 
-    backgroundModalSettingsTitle: 'Background settings',
+    backgroundModalSettingsTitle: 'Background options',
     backgroundEnableName: 'Enable background',
     backgroundEnableDesc: 'Toggle the visibility of the custom background for this profile.',
     convertImagesName: 'Convert images to JPG',

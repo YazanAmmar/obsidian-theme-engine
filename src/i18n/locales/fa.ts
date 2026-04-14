@@ -62,7 +62,7 @@
     tooltipCopyJson: 'کپی کردن JSON نمایه فعلی در کلیپ‌بورد',
   },
   options: {
-    heading: 'تنظیمات پیشرفته',
+    heading: 'گزینه‌های پیشرفته',
     liveUpdateName: 'فریم در ثانیه به‌روزرسانی زنده',
     liveUpdateDesc:
       'تعداد دفعاتی که رابط کاربری در هر ثانیه پیش‌نمایش تغییرات رنگ را هنگام کشیدن نشان می‌دهد تنظیم می‌کند (0 = غیرفعال کردن پیش‌نمایش زنده). مقادیر کمتر می‌تواند عملکرد را بهبود بخشد.',
@@ -83,7 +83,7 @@
     resetPluginButton: 'بازنشانی تمام داده‌ها...',
     backgroundName: 'تنظیم پس‌زمینه سفارشی',
     backgroundDesc: 'مدیریت تصویر یا ویدئو پس‌زمینه برای این پروفایل.',
-    backgroundModalSettingsTitle: 'تنظیمات پس‌زمینه',
+    backgroundModalSettingsTitle: 'گزینه‌های پس‌زمینه',
     backgroundEnableName: 'فعال کردن پس‌زمینه',
     backgroundEnableDesc: 'نمایش یا پنهان کردن پس‌زمینه سفارشی برای این پروفایل را تغییر دهید.',
     convertImagesName: 'تبدیل تصاویر به JPG',

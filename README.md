@@ -1,4 +1,4 @@
-# Obsidian Theme Engine
+# Theme Engine for Obsidian
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub all releases](https://img.shields.io/github/downloads/YazanAmmar/obsidian-theme-engine/total?style=flat&color=brightgreen)](https://github.com/YazanAmmar/obsidian-theme-engine/releases)
@@ -571,7 +571,7 @@ A: Yes, absolutely. The plugin fully supports **Arabic** (العَرَبيَّة
 MIT — see [LICENSE](https://github.com/YazanAmmar/obsidian-theme-engine/blob/main/LICENSE).
 
 > [!NOTE]
-> This license does not grant rights to use the project's logo or visual identity.
+> This license does not grant rights to use the project's logo or visual identity see [TRADEMARK.md](./TRADEMARK.md).
 
 ---
 
@@ -582,7 +582,7 @@ The official logo (phoenix emblem) and visual identity of this project are prote
 - You may use, modify, and distribute the code under the MIT license
 - You may NOT use the official logo or visual identity in forks, derivatives, or redistributed versions
 
-> For full trademark and branding rules, see [TRADEMARK.md](./TRADEMARK.md)
+> For full trademark and branding rules, see [TRADEMARK.md](./TRADEMARK.md).
 
 ---
 

@@ -39,17 +39,24 @@ export function registerCommands(plugin: ThemeEngine) {
   plugin.addCommand({
     id: PLUGIN_COMMAND_SUFFIXES[1],
     name: t('commands.cycleNext'),
-    callback: async () => {
+    checkCallback: (checking: boolean) => {
       const names = Object.keys(plugin.settings.profiles || {});
-      if (names.length === 0) {
-        new Notice(t('notices.noProfilesFound'));
-        return;
-      }
+      if (names.length === 0) return false;
+
+      if (checking) return true;
+
       const idx = names.indexOf(plugin.settings.activeProfile);
-      const next = names[(idx + 1) % names.length];
+      const next = names[((idx >= 0 ? idx : -1) + 1) % names.length];
       plugin.settings.activeProfile = next;
-      await plugin.saveSettings();
-      new Notice(t('notices.activeProfileSwitched', next));
+      void plugin
+        .saveSettings()
+        .then(() => {
+          new Notice(t('notices.activeProfileSwitched', next));
+        })
+        .catch((error) => {
+          console.error('Failed to switch to the next profile.', error);
+        });
+      return true;
     },
   });
 
@@ -57,19 +64,27 @@ export function registerCommands(plugin: ThemeEngine) {
   plugin.addCommand({
     id: PLUGIN_COMMAND_SUFFIXES[2],
     name: t('commands.cyclePrevious'),
-    callback: async () => {
+    checkCallback: (checking: boolean) => {
       const names = Object.keys(plugin.settings.profiles || {});
-      if (names.length === 0) {
-        new Notice(t('notices.noProfilesFound'));
-        return;
-      }
+      if (names.length === 0) return false;
+
+      if (checking) return true;
+
       const currentIndex = names.indexOf(plugin.settings.activeProfile);
-      const previousIndex = (currentIndex - 1 + names.length) % names.length;
+      const previousIndex =
+        currentIndex >= 0 ? (currentIndex - 1 + names.length) % names.length : names.length - 1;
       const previousProfile = names[previousIndex];
 
       plugin.settings.activeProfile = previousProfile;
-      await plugin.saveSettings();
-      new Notice(t('notices.activeProfileSwitched', previousProfile));
+      void plugin
+        .saveSettings()
+        .then(() => {
+          new Notice(t('notices.activeProfileSwitched', previousProfile));
+        })
+        .catch((error) => {
+          console.error('Failed to switch to the previous profile.', error);
+        });
+      return true;
     },
   });
 
@@ -88,14 +103,13 @@ export function registerCommands(plugin: ThemeEngine) {
   plugin.addCommand({
     id: PLUGIN_COMMAND_SUFFIXES[4],
     name: t('commands.toggleTheme'),
-    callback: async () => {
+    checkCallback: (checking: boolean) => {
       const activeProfileName = plugin.settings.activeProfile;
       const activeProfile = plugin.settings.profiles[activeProfileName];
 
-      if (!activeProfile) {
-        new Notice(t('notices.profileNotFound'));
-        return;
-      }
+      if (!activeProfile) return false;
+
+      if (checking) return true;
 
       const currentTheme = activeProfile.themeType || 'auto';
       let nextTheme: 'auto' | 'dark' | 'light';
@@ -113,8 +127,15 @@ export function registerCommands(plugin: ThemeEngine) {
       }
 
       activeProfile.themeType = nextTheme;
-      await plugin.saveSettings();
-      new Notice(noticeMessage);
+      void plugin
+        .saveSettings()
+        .then(() => {
+          new Notice(noticeMessage);
+        })
+        .catch((error) => {
+          console.error('Failed to toggle the active profile theme.', error);
+        });
+      return true;
     },
   });
 }

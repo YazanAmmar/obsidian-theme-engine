@@ -61,7 +61,7 @@ export default {
     tooltipCopyJson: 'نسخ JSON للملف الشخصي الحالي إلى الحافظة',
   },
   options: {
-    heading: 'إعدادات متقدمة',
+    heading: 'خيارات متقدمة',
     liveUpdateName: 'معدل التحديث المباشر (إطار بالثانية)',
     liveUpdateDesc:
       'يحدد عدد مرات تحديث معاينة الألوان في الثانية أثناء السحب (0 = تعطيل المعاينة). القيم المنخفضة تحسن الأداء.',
@@ -82,7 +82,7 @@ export default {
     resetPluginButton: 'إعادة تعيين كل البيانات...',
     backgroundName: 'تعيين خلفية مخصصة',
     backgroundDesc: 'إدارة صورة أو فيديو الخلفية لهذا الملف الشخصي.',
-    backgroundModalSettingsTitle: 'إعدادات الخلفية',
+    backgroundModalSettingsTitle: 'خيارات الخلفية',
     backgroundEnableName: 'تفعيل الخلفية',
     backgroundEnableDesc: 'التحكم بظهور أو إخفاء الخلفية المخصصة لهذا الملف الشخصي.',
     convertImagesName: 'تحويل الصور إلى JPG',

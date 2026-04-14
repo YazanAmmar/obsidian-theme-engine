@@ -2,6 +2,7 @@ import {
   App,
   Notice,
   SearchComponent,
+  debounce,
   setIcon,
   Setting,
   TextAreaComponent,
@@ -17,7 +18,7 @@ import {
 import { CORE_LANGUAGES, type LocaleCode, type LocalizedValue } from '../../../i18n/types';
 import type ThemeEngine from '../../../main';
 import type { CustomTranslation } from '../../../types';
-import { debounce, unflattenStrings } from '../../../utils';
+import { unflattenStrings } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 

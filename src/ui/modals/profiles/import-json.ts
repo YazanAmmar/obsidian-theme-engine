@@ -1,8 +1,7 @@
-import { App, Notice, Setting, TextComponent } from 'obsidian';
+import { App, Notice, Setting, TextComponent, debounce } from 'obsidian';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
 import type { Profile, Snippet } from '../../../types';
-import { debounce } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 
