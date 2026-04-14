@@ -1,39 +1,3 @@
-/* Directionality (LTR/RTL) */
-.is-ltr {
-  direction: ltr !important;
-
-  h2,
-  h3,
-  .setting-item-name,
-  .setting-item-description {
-    text-align: left !important;
-  }
-
-  .setting-item,
-  .modal-content .setting-item {
-    flex-direction: row !important;
-  }
-
-  .theme-engine-text-input {
-    margin-left: 8px;
-  }
-}
-
-.is-rtl {
-  direction: rtl;
-
-  .theme-engine-text-input {
-    margin-right: 8px;
-  }
-
-  .setting-item-name,
-  .setting-item-description,
-  h2,
-  h3 {
-    text-align: right;
-  }
-}
-
 /* Global RTL override for notices */
 body.theme-engine-rtl {
   .notice {

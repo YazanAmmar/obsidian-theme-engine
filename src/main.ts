@@ -117,6 +117,8 @@ export default class ThemeEngine extends Plugin {
         }
       }
     }, intervalMs);
+
+    this.registerInterval(this.colorUpdateInterval);
   }
 
   // Stop the update loop
