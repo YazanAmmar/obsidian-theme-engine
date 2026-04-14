@@ -261,7 +261,7 @@ export default {
       snippetsDesc: 'Deletes all CSS snippets, both global and inside all profiles.',
       backgroundsLabel: 'Backgrounds folder',
       backgroundsDesc:
-        "Deletes the entire backgrounds folder inside Obsidian's configuration directory (configdir/backgrounds), including all media.",
+        "Deletes the entire backgrounds folder inside this plugin's data folder, including all media.",
       settingsLabel: 'Plugin settings',
       settingsDesc: 'Resets language, fps, layout, and other options to default.',
       languagesLabel: 'Custom languages',

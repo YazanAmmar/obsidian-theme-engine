@@ -8,6 +8,100 @@ import { findNextAvailablePath, maybeConvertToJpg, setCssPropsSafe } from '../ut
 export type MediaType = 'image' | 'video';
 export type ConflictChoice = 'replace' | 'keep' | 'prompt';
 
+const getPluginDataPath = (plugin: Pick<ThemeEngine, 'app' | 'manifest'>): string => {
+  return plugin.manifest.dir ?? `${plugin.app.vault.configDir}/plugins/${plugin.manifest.id}`;
+};
+
+const getLegacyBackgroundsPath = (plugin: Pick<ThemeEngine, 'app'>): string => {
+  return `${plugin.app.vault.configDir}/backgrounds`;
+};
+
+export const getBackgroundsPath = (plugin: Pick<ThemeEngine, 'app' | 'manifest'>): string => {
+  return `${getPluginDataPath(plugin)}/backgrounds`;
+};
+
+export const getBackgroundsPathsForCleanup = (
+  plugin: Pick<ThemeEngine, 'app' | 'manifest'>,
+): string[] => {
+  return [...new Set([getBackgroundsPath(plugin), getLegacyBackgroundsPath(plugin)])];
+};
+
+const ensureFolderExists = async (
+  adapter: ThemeEngine['app']['vault']['adapter'],
+  path: string,
+): Promise<void> => {
+  if (!(await adapter.exists(path))) {
+    await adapter.mkdir(path);
+  }
+};
+
+const migrateLegacyBackgroundsIfNeeded = async (plugin: ThemeEngine): Promise<void> => {
+  const adapter = plugin.app.vault.adapter;
+  const legacyPath = getLegacyBackgroundsPath(plugin);
+  const backgroundsPath = getBackgroundsPath(plugin);
+
+  if (legacyPath === backgroundsPath || !(await adapter.exists(legacyPath))) {
+    return;
+  }
+
+  const legacyList = await adapter.list(legacyPath);
+  if (legacyList.files.length === 0 && legacyList.folders.length === 0) {
+    return;
+  }
+
+  const migratedPaths = new Map<string, string>();
+
+  for (const oldPath of legacyList.files) {
+    const relativePath = oldPath.startsWith(`${legacyPath}/`)
+      ? oldPath.substring(legacyPath.length + 1)
+      : oldPath.split('/').pop() || '';
+    if (!relativePath) continue;
+
+    let targetPath = `${backgroundsPath}/${relativePath}`;
+    const targetParts = targetPath.split('/');
+    targetParts.pop();
+    const targetDir = targetParts.join('/');
+    if (targetDir) {
+      await ensureFolderExists(adapter, targetDir);
+    }
+
+    if (await adapter.exists(targetPath)) {
+      targetPath = await findNextAvailablePath(adapter, targetPath);
+    }
+
+    await adapter.rename(oldPath, targetPath);
+    migratedPaths.set(oldPath, targetPath);
+  }
+
+  let settingsChanged = false;
+  for (const profile of Object.values(plugin.settings.profiles)) {
+    if (!profile?.backgroundPath) continue;
+
+    const migratedPath = migratedPaths.get(profile.backgroundPath);
+    if (!migratedPath) continue;
+
+    profile.backgroundPath = migratedPath;
+    settingsChanged = true;
+  }
+
+  if (settingsChanged) {
+    await plugin.saveData(plugin.settings);
+  }
+
+  if (await adapter.exists(legacyPath)) {
+    const remaining = await adapter.list(legacyPath);
+    if (remaining.files.length === 0 && remaining.folders.length === 0) {
+      await adapter.rmdir(legacyPath, true);
+    }
+  }
+
+  if (migratedPaths.size > 0) {
+    console.debug(
+      `Theme Engine: Migrated ${migratedPaths.size} background file(s) into "${backgroundsPath}".`,
+    );
+  }
+};
+
 export const clearBackgroundMedia = (): void => {
   setCssPropsSafe(document.body, { '--cm-background-image': null });
   document.body.classList.remove('cm-workspace-background-active');
@@ -151,12 +245,14 @@ export const applyBackgroundMedia = async (plugin: ThemeEngine): Promise<void> =
 };
 
 export const ensureBackgroundsFolderExists = async (plugin: ThemeEngine): Promise<void> => {
-  const backgroundsPath = `${plugin.app.vault.configDir}/backgrounds`;
+  const adapter = plugin.app.vault.adapter;
+  const pluginDataPath = getPluginDataPath(plugin);
+  const backgroundsPath = getBackgroundsPath(plugin);
   try {
-    if (!(await plugin.app.vault.adapter.exists(backgroundsPath))) {
-      await plugin.app.vault.adapter.mkdir(backgroundsPath);
-      console.debug(`Theme Engine: Created global backgrounds folder at ${backgroundsPath}`);
-    }
+    await ensureFolderExists(adapter, pluginDataPath);
+    await ensureFolderExists(adapter, backgroundsPath);
+    await migrateLegacyBackgroundsIfNeeded(plugin);
+    console.debug(`Theme Engine: Backgrounds folder ready at ${backgroundsPath}`);
   } catch (error) {
     console.error('Theme Engine: Failed to create backgrounds folder on startup.', error);
   }
@@ -250,13 +346,11 @@ export const setBackgroundMedia = async (
   const fileExt = finalFileName.split('.').pop()?.toLowerCase();
   const mediaType: MediaType = fileExt === 'mp4' || fileExt === 'webm' ? 'video' : 'image';
 
-  const backgroundsPath = `${plugin.app.vault.configDir}/backgrounds`;
+  const backgroundsPath = getBackgroundsPath(plugin);
   let targetPath = `${backgroundsPath}/${finalFileName}`;
 
   try {
-    if (!(await plugin.app.vault.adapter.exists(backgroundsPath))) {
-      await plugin.app.vault.adapter.mkdir(backgroundsPath);
-    }
+    await ensureFolderExists(plugin.app.vault.adapter, backgroundsPath);
 
     const fileExists = await plugin.app.vault.adapter.exists(targetPath);
 

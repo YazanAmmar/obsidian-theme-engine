@@ -1,5 +1,6 @@
 import { ButtonComponent, Notice } from 'obsidian';
 import { DEFAULT_SETTINGS, DEFAULT_VARS } from '../constants';
+import { getBackgroundsPathsForCleanup } from './background-media';
 import { t } from '../i18n/strings';
 import type ThemeEngine from '../main';
 import type { PluginSettings } from '../types';
@@ -173,11 +174,12 @@ export const resetPluginData = async (
   console.debug('Theme Engine: Selective data reset complete.', options);
 
   if (options.deleteBackgrounds) {
-    const backgroundsPath = `${plugin.app.vault.configDir}/backgrounds`;
     try {
-      if (await plugin.app.vault.adapter.exists(backgroundsPath)) {
-        console.debug('Theme Engine: Deleting backgrounds folder...');
-        await plugin.app.vault.adapter.rmdir(backgroundsPath, true);
+      for (const backgroundsPath of getBackgroundsPathsForCleanup(plugin)) {
+        if (await plugin.app.vault.adapter.exists(backgroundsPath)) {
+          console.debug(`Theme Engine: Deleting backgrounds folder at ${backgroundsPath}...`);
+          await plugin.app.vault.adapter.rmdir(backgroundsPath, true);
+        }
       }
 
       if (!options.deleteProfiles) {

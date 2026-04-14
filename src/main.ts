@@ -225,7 +225,7 @@ export default class ThemeEngine extends Plugin {
   }
 
   /**
-   * Ensures the global .obsidian/backgrounds folder exists on startup.
+   * Ensures the plugin backgrounds folder exists on startup.
    */
   async _ensureBackgroundsFolderExists(): Promise<void> {
     await ensureBackgroundsFolderExists(this);
@@ -236,7 +236,7 @@ export default class ThemeEngine extends Plugin {
     await removeBackgroundMediaByPathCore(this, pathToDelete);
   }
 
-  // Adds or replaces a background image file in the global folder.
+  // Adds or replaces a background image file in the plugin backgrounds folder.
   async setBackgroundMedia(
     arrayBuffer: ArrayBuffer,
     fileName: string,

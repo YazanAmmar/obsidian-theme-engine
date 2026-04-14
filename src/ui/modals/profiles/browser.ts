@@ -1,4 +1,5 @@
 import { App, ButtonComponent, Notice, setIcon } from 'obsidian';
+import { getBackgroundsPath } from '../../../core/background-media';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
 import { setCssPropsSafe } from '../../../utils';
@@ -52,7 +53,7 @@ export class ProfileImageBrowserModal extends ThemeEngineBaseModal {
    */
   async displayImages() {
     this.galleryEl.empty();
-    const backgroundsPath = `${this.app.vault.configDir}/backgrounds`;
+    const backgroundsPath = getBackgroundsPath(this.plugin);
     const mediaExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.mp4', '.webm'];
 
     let files: string[] = [];

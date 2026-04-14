@@ -266,7 +266,7 @@
       snippetsDesc: 'Supprime tous les extraits CSS, globaux et internes à tous les profils.',
       backgroundsLabel: 'Dossier des arrière-plans',
       backgroundsDesc:
-        "Supprime entièrement le dossier des arrière-plans dans le répertoire de configuration d'Obsidian (configDir/backgrounds), ainsi que tous les médias qu'il contient.",
+        "Supprime entièrement le dossier des arrière-plans dans le dossier de données de ce plugin, ainsi que tous les médias qu'il contient.",
       settingsLabel: 'Paramètres du plugin',
       settingsDesc:
         'Réinitialise la langue, les FPS, la disposition et les autres options par défaut.',
