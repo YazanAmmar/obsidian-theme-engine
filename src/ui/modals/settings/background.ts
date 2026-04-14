@@ -1,6 +1,7 @@
 import { App, ButtonComponent, Notice, debounce, requestUrl, Setting } from 'obsidian';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
+import { setCssPropsSafe } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 
@@ -48,10 +49,10 @@ export class BackgroundImageSettingsModal extends ThemeEngineBaseModal {
     let videoButton: ButtonComponent;
 
     const imageSettingsEl = contentEl.createDiv('cm-settings-group');
-    imageSettingsEl.setCssProps({ display: 'none' });
+    setCssPropsSafe(imageSettingsEl, { display: 'none' });
 
     const videoSettingsEl = contentEl.createDiv('cm-settings-group');
-    videoSettingsEl.setCssProps({ display: 'none' });
+    setCssPropsSafe(videoSettingsEl, { display: 'none' });
 
     // --- Fill the Image Settings container ---
     new Setting(imageSettingsEl)
@@ -101,7 +102,7 @@ export class BackgroundImageSettingsModal extends ThemeEngineBaseModal {
           const value = parseFloat((e.target as HTMLInputElement).value);
           const videoEl = document.querySelector<HTMLVideoElement>('#cm-background-video');
           if (videoEl) {
-            videoEl.setCssProps({ opacity: value.toString() });
+            setCssPropsSafe(videoEl, { opacity: value.toString() });
           }
         };
       });
@@ -126,13 +127,13 @@ export class BackgroundImageSettingsModal extends ThemeEngineBaseModal {
       if (active === 'image') {
         imageButton.setCta();
         videoButton.buttonEl.classList.remove('mod-cta');
-        imageSettingsEl.setCssProps({ display: 'block' });
-        videoSettingsEl.setCssProps({ display: 'none' });
+        setCssPropsSafe(imageSettingsEl, { display: 'block' });
+        setCssPropsSafe(videoSettingsEl, { display: 'none' });
       } else {
         imageButton.buttonEl.classList.remove('mod-cta');
         videoButton.setCta();
-        imageSettingsEl.setCssProps({ display: 'none' });
-        videoSettingsEl.setCssProps({ display: 'block' });
+        setCssPropsSafe(imageSettingsEl, { display: 'none' });
+        setCssPropsSafe(videoSettingsEl, { display: 'block' });
       }
     };
 

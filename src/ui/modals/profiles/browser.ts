@@ -1,6 +1,7 @@
 import { App, ButtonComponent, Notice, setIcon } from 'obsidian';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
+import { setCssPropsSafe } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 import { ConfirmationModal } from '../common/confirmation';
@@ -133,7 +134,7 @@ export class ProfileImageBrowserModal extends ThemeEngineBaseModal {
 
         const updateMuteIcon = () => {
           setIcon(muteButton, videoEl.muted ? 'volume-x' : 'volume-2');
-          muteButton.setCssProps({ opacity: '0' });
+          setCssPropsSafe(muteButton, { opacity: '0' });
         };
         updateMuteIcon();
 
@@ -141,7 +142,7 @@ export class ProfileImageBrowserModal extends ThemeEngineBaseModal {
           e.stopPropagation();
           videoEl.muted = !videoEl.muted;
           updateMuteIcon();
-          muteButton.setCssProps({
+          setCssPropsSafe(muteButton, {
             opacity: videoEl.muted ? '0.8' : '1',
           });
         });
@@ -157,8 +158,8 @@ export class ProfileImageBrowserModal extends ThemeEngineBaseModal {
                 const playOverlay = container.querySelector<HTMLElement>('.cm-media-play-overlay');
                 const muteToggle = container.querySelector<HTMLElement>('.cm-media-mute-toggle');
 
-                playOverlay?.setCssProps({ opacity: '1' });
-                muteToggle?.setCssProps({ opacity: '0' });
+                if (playOverlay) setCssPropsSafe(playOverlay, { opacity: '1' });
+                if (muteToggle) setCssPropsSafe(muteToggle, { opacity: '0' });
               }
             }
           }
@@ -167,14 +168,14 @@ export class ProfileImageBrowserModal extends ThemeEngineBaseModal {
             void videoEl.play().catch((err) => {
               console.error('Failed to play video:', err);
             });
-            playOverlay.setCssProps({ opacity: '0' });
-            muteButton.setCssProps({
+            setCssPropsSafe(playOverlay, { opacity: '0' });
+            setCssPropsSafe(muteButton, {
               opacity: videoEl.muted ? '0.8' : '1',
             });
           } else {
-            muteButton.setCssProps({ opacity: '0' });
+            setCssPropsSafe(muteButton, { opacity: '0' });
             videoEl.pause();
-            playOverlay.setCssProps({ opacity: '1' });
+            setCssPropsSafe(playOverlay, { opacity: '1' });
           }
         });
       } else {

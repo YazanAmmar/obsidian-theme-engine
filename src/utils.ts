@@ -71,6 +71,27 @@ export function isIconizeEnabled(app: App): boolean {
   return isPluginEnabled(app, iconizeIDs);
 }
 
+type CssPropsTarget = HTMLElement | SVGElement;
+
+// Uses the native Obsidian helper for string values and removes properties for null/empty ones.
+export function setCssPropsSafe(
+  element: CssPropsTarget,
+  props: Record<string, string | null | undefined>,
+): void {
+  for (const [key, value] of Object.entries(props)) {
+    if (value === null || value === undefined || value === '') {
+      element.style.removeProperty(key);
+      continue;
+    }
+
+    try {
+      element.style.setProperty(key, value);
+    } catch (error) {
+      console.warn(`setCssPropsSafe: failed to set ${key} = ${value}`, error);
+    }
+  }
+}
+
 // Auto-increments filename if path exists (e.g., file-2.png)
 export async function findNextAvailablePath(adapter: DataAdapter, path: string): Promise<string> {
   if (!(await adapter.exists(path))) {
@@ -260,29 +281,4 @@ export function convertColorToHex(colorString: string): string {
   }
 
   return s;
-}
-
-// Polyfill for HTMLElement.setCssProps (Obsidian 1.7+ API)
-declare global {
-  interface HTMLElement {
-    setCssProps(props: Record<string, string | null>): void;
-  }
-}
-
-if (!HTMLElement.prototype.setCssProps) {
-  HTMLElement.prototype.setCssProps = function (props) {
-    for (const key in props) {
-      const value = props[key];
-
-      if (value === null || value === undefined || value === '') {
-        this.style.removeProperty(key);
-      } else {
-        try {
-          this.style.setProperty(key, value);
-        } catch (e) {
-          console.warn(`setCssProps: failed to set ${key} = ${value}`, e);
-        }
-      }
-    }
-  };
 }

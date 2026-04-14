@@ -3,13 +3,13 @@ import { BUILT_IN_PROFILES_VARS } from '../constants';
 import { t } from '../i18n/strings';
 import type ThemeEngine from '../main';
 import { FileConflictModal } from '../ui/modals';
-import { findNextAvailablePath, maybeConvertToJpg } from '../utils';
+import { findNextAvailablePath, maybeConvertToJpg, setCssPropsSafe } from '../utils';
 
 export type MediaType = 'image' | 'video';
 export type ConflictChoice = 'replace' | 'keep' | 'prompt';
 
 export const clearBackgroundMedia = (): void => {
-  document.body.setCssProps({ '--cm-background-image': null });
+  setCssPropsSafe(document.body, { '--cm-background-image': null });
   document.body.classList.remove('cm-workspace-background-active');
   document.body.classList.remove('cm-settings-background-active');
 
@@ -121,7 +121,7 @@ export const applyBackgroundMedia = async (plugin: ThemeEngine): Promise<void> =
   const type = profile.backgroundType;
   if (type === 'image') {
     const imageUrl = plugin.app.vault.adapter.getResourcePath(path);
-    document.body.setCssProps({
+    setCssPropsSafe(document.body, {
       '--cm-background-image': `url("${imageUrl}")`,
     });
 
@@ -141,7 +141,7 @@ export const applyBackgroundMedia = async (plugin: ThemeEngine): Promise<void> =
     videoEl.loop = true;
     videoEl.muted = profile.videoMuted !== false;
     videoEl.playsInline = true;
-    videoEl.setCssProps({
+    setCssPropsSafe(videoEl, {
       opacity: (profile.videoOpacity || 0.5).toString(),
     });
 

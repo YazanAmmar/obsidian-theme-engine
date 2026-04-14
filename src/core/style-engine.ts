@@ -1,10 +1,8 @@
 import { DEFAULT_VARS } from '../constants';
 import type ThemeEngine from '../main';
-import { flattenVars, isIconizeEnabled } from '../utils';
+import { flattenVars, isIconizeEnabled, setCssPropsSafe } from '../utils';
 
-type StylableElement = Element & {
-  setCssProps: (props: Record<string, string | null>) => void;
-};
+type StylableElement = HTMLElement | SVGElement;
 
 type VaultWithConfigGetter = {
   getConfig: (key: string) => string;
@@ -83,8 +81,8 @@ export const applyPendingNow = (plugin: ThemeEngine): void => {
     }
 
     for (const key of keys) {
-      const value = pending[key] ?? null;
-      document.body.setCssProps({ [key]: value });
+      const value = pending[key];
+      setCssPropsSafe(document.body, { [key]: value });
     }
 
     plugin.pendingVarUpdates = {};
@@ -141,10 +139,8 @@ export const forceIconizeColors = (plugin: ThemeEngine): void => {
     if (!svg) return;
 
     ([svg, ...svg.querySelectorAll('*')] as StylableElement[]).forEach((el) => {
-      if (typeof el.setCssProps !== 'function') return;
-
       if (!iconizeColor) {
-        el.setCssProps({
+        setCssPropsSafe(el, {
           fill: null,
           stroke: null,
         });
@@ -155,11 +151,11 @@ export const forceIconizeColors = (plugin: ThemeEngine): void => {
       const originalStroke = el.getAttribute('stroke');
 
       if (originalFill && originalFill !== 'none' && !originalFill.startsWith('url(')) {
-        el.setCssProps({ fill: iconizeColor });
+        setCssPropsSafe(el, { fill: iconizeColor });
       }
 
       if (originalStroke && originalStroke !== 'none') {
-        el.setCssProps({ stroke: iconizeColor });
+        setCssPropsSafe(el, { stroke: iconizeColor });
       }
     });
   });
@@ -296,7 +292,7 @@ export const clearStyles = (plugin: ThemeEngine): void => {
     }
   }
   allVars.forEach((key: string) => {
-    document.body.setCssProps({ [key]: null });
+    setCssPropsSafe(document.body, { [key]: null });
   });
 
   document.querySelectorAll('.iconize-icon').forEach((iconNode) => {
@@ -304,9 +300,7 @@ export const clearStyles = (plugin: ThemeEngine): void => {
     if (!svg) return;
 
     ([svg, ...svg.querySelectorAll('*')] as StylableElement[]).forEach((el) => {
-      if (typeof el.setCssProps !== 'function') return;
-
-      el.setCssProps({
+      setCssPropsSafe(el, {
         fill: null,
         stroke: null,
       });

@@ -3,7 +3,7 @@ import { DEFAULT_VARS } from '../../../constants';
 import { t } from '../../../i18n/strings';
 import type ThemeEngine from '../../../main';
 import type { CustomVarType } from '../../../types';
-import { flattenVars } from '../../../utils';
+import { flattenVars, setCssPropsSafe } from '../../../utils';
 import type { ThemeEngineSettingTab } from '../../settingsTab';
 import { ThemeEngineBaseModal } from '../base';
 
@@ -103,7 +103,7 @@ export class CustomVariableMetaModal extends ThemeEngineBaseModal {
           type: 'number',
           cls: 'theme-engine-text-input',
         });
-        sizeInput.setCssProps({ width: '80px' });
+        setCssPropsSafe(sizeInput, { width: '80px' });
         sizeInput.value = num;
 
         const unitDropdown = new DropdownComponent(valueSetting.controlEl);
@@ -146,7 +146,7 @@ export class CustomVariableMetaModal extends ThemeEngineBaseModal {
               this.varValue = value;
             });
 
-          text.inputEl.setCssProps({ width: '100%' });
+          setCssPropsSafe(text.inputEl, { width: '100%' });
           text.inputEl.classList.add('cm-textarea-size');
         });
 

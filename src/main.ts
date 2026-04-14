@@ -59,7 +59,7 @@ import {
 import { initializeT, t } from './i18n/strings';
 import { NoticeRule, PluginSettings } from './types';
 import { ThemeEngineSettingTab } from './ui/settingsTab';
-import { isIconizeEnabled } from './utils';
+import { isIconizeEnabled, setCssPropsSafe } from './utils';
 
 type AppWithSettingsManager = {
   setting: {
@@ -100,8 +100,8 @@ export default class ThemeEngine extends Plugin {
       const iconizeUpdateNeeded = pendingKeys.includes('--iconize-icon-color');
 
       for (const varName of pendingKeys) {
-        const value = this.pendingVarUpdates[varName] ?? null;
-        document.body.setCssProps({ [varName]: value });
+        const value = this.pendingVarUpdates[varName];
+        setCssPropsSafe(document.body, { [varName]: value });
       }
 
       this.pendingVarUpdates = {};

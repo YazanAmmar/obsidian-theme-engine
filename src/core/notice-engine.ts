@@ -1,5 +1,6 @@
 import type ThemeEngine from '../main';
 import type { NoticeRule } from '../types';
+import { setCssPropsSafe } from '../utils';
 
 const matchesRule = (noticeText: string, rule: NoticeRule): boolean => {
   if (!rule.keywords?.trim()) return false;
@@ -179,7 +180,7 @@ export const processNotice = (plugin: ThemeEngine, el: HTMLElement): void => {
           }
           const span = document.createElement('span');
           span.className = 'cm-theme-engine-keyword-highlight';
-          span.setCssProps({ color: match.color });
+          setCssPropsSafe(span, { color: match.color });
           span.textContent = nodeContent.substring(match.start, match.end);
           fragments.appendChild(span);
           lastIndex = match.end;

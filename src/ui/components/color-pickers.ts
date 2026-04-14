@@ -6,6 +6,7 @@ import {
   getAccessibilityRating,
   getContrastRatio,
   isIconizeEnabled,
+  setCssPropsSafe,
 } from '../../utils';
 import { IconizeSettingsModal, NoticeRulesModal } from '../modals';
 import type { ThemeEngineSettingTab } from '../settingsTab';
@@ -375,7 +376,7 @@ export function drawColorPickers(
         if (plugin.settings.colorUpdateFPS > 0) {
           plugin.pendingVarUpdates[varName] = newValue;
         } else {
-          document.body.setCssProps({
+          setCssPropsSafe(document.body, {
             [varName]: newValue || null,
           });
 
@@ -449,7 +450,7 @@ export function drawColorPickers(
             cls: 'theme-engine-text-input',
           });
           sizeInput.value = numValue;
-          sizeInput.setCssProps({ width: '80px' });
+          setCssPropsSafe(sizeInput, { width: '80px' });
 
           const unitDropdown = setting.controlEl.createEl('select', {
             cls: 'dropdown cm-search-small',
@@ -504,7 +505,7 @@ export function drawColorPickers(
             cls: 'theme-engine-text-input',
           });
           numInput.value = varValue;
-          numInput.setCssProps({ width: '100px' });
+          setCssPropsSafe(numInput, { width: '100px' });
 
           numInput.addEventListener('change', (e) => {
             handleCustomVarChange((e.target as HTMLInputElement).value);
@@ -537,7 +538,7 @@ export function drawColorPickers(
           .onClick(async () => {
             delete activeProfile.vars[varName];
             // Remove the property from the DOM
-            document.body.setCssProps({
+            setCssPropsSafe(document.body, {
               [varName]: null,
             });
 
