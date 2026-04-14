@@ -92,67 +92,71 @@
   }
 }
 
-/* Select Dropdown & Search Small Input Styling */
-.setting-item-control select,
-.cm-search-small {
-  background-color: transparent;
-  border: 1px solid var(--background-modifier-border);
-  box-shadow: none;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
+/* Settings + modal controls owned by Theme Engine */
+.theme-engine-settings-tab,
+.theme-engine-modal,
+.color-master-modal {
+  .setting-item-control select,
+  .cm-search-small {
+    background-color: transparent;
+    border: 1px solid var(--background-modifier-border);
+    box-shadow: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
 
-  font-size: 12px;
-  border-radius: 6px;
-  color: var(--text-normal) !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-  background-repeat: no-repeat !important;
-  background-position: right 7px center !important;
+    font-size: 12px;
+    border-radius: 6px;
+    color: var(--text-normal) !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-repeat: no-repeat !important;
+    background-position: right 7px center !important;
 
-  &:hover {
-    background-color: var(--background-modifier-hover);
-    border-color: var(--background-modifier-border-hover);
-  }
-
-  &.is-active {
-    background-color: var(--interactive-accent);
-    color: var(--text-on-accent);
     &:hover {
-      background-color: var(--interactive-accent-hover) !important;
+      background-color: var(--background-modifier-hover);
+      border-color: var(--background-modifier-border-hover);
+    }
+
+    &.is-active {
+      background-color: var(--interactive-accent);
+      color: var(--text-on-accent);
+      &:hover {
+        background-color: var(--interactive-accent-hover) !important;
+      }
     }
   }
-}
 
-/* Generic Control Buttons */
-.setting-item-control .cm-control-button {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: var(--text-normal);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--background-modifier-hover) !important;
+  /* Generic Control Buttons */
+  .setting-item-control .cm-control-button {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     color: var(--text-normal);
-    border-color: var(--background-modifier-border-hover) !important;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--background-modifier-hover) !important;
+      color: var(--text-normal);
+      border-color: var(--background-modifier-border-hover) !important;
+    }
+
+    &[disabled],
+    &.is-disabled {
+      cursor: not-allowed;
+    }
   }
 
-  &[disabled],
-  &.is-disabled {
-    cursor: not-allowed;
-  }
-}
-
-/* Focus State for Checkboxes */
-.setting-item .checkbox-container {
-  outline: none !important;
-  box-shadow: none !important;
-
-  &:focus,
-  &:focus-visible {
+  /* Focus State for Checkboxes */
+  .setting-item .checkbox-container {
     outline: none !important;
     box-shadow: none !important;
-    border-color: var(--background-modifier-border) !important;
+
+    &:focus,
+    &:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: var(--background-modifier-border) !important;
+    }
   }
 }

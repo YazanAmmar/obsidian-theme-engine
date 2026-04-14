@@ -12,13 +12,11 @@
   font-weight: 600;
 }
 
-body.theme-engine-overrides-active {
-  [data-cm-theme-engine-notice='true'] {
-    padding: 8px 12px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    max-width: 300px;
-    border-radius: 6px !important;
-    min-width: 120px !important;
-    box-sizing: border-box !important;
-  }
+[data-cm-theme-engine-notice='true'] {
+  padding: 8px 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  max-width: 300px;
+  border-radius: 6px !important;
+  min-width: 120px !important;
+  box-sizing: border-box !important;
 }
