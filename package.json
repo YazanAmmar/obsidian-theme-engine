@@ -1,15 +1,16 @@
 {
-  "name": "obsidian-theme-engine",
+  "name": "theme-engine",
   "version": "2.0.0",
   "description": "Take full control of your workspace with dynamic theme profiles, live overrides, and a powerful customization engine built for complete visual freedom.",
   "main": "main.js",
+  "type": "module",
   "scripts": {
-    "build:js": "esbuild src/main.ts --bundle --platform=browser --format=cjs --outfile=main.js --minify --external:obsidian",
-    "build:css": "sass src/styles/main.scss styles.css --no-source-map",
     "format": "prettier --write \"src/**/*.{ts,scss}\"",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "build": "npm run format && npm run build:js && npm run build:css",
-    "dev": "npm run build && cpy main.js styles.css manifest.json \"C:\\Users\\user\\Documents\\Obsidian\\My Notes\\.obsidian\\plugins\\obsidian-theme-engine\""
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
+    "build": "npm run check && node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs dev"
   },
   "keywords": [],
   "author": "Yazan Ammar",

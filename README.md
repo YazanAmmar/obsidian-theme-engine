@@ -383,11 +383,9 @@ If you want to customize the plugin or contribute to its development, you can ea
 
 > [!NOTE]
 >
-> The `npm run dev` command is currently configured with a personal path:
+> The `npm run dev` command is configured to automatically copy the built files to a local Obsidian vault for testing.
 >
-> `C:\Users\user\Documents\Obsidian\My Notes\.obsidian\plugins\obsidian-theme-engine`
->
-> You must edit the `dev` script inside the `package.json` file to point to your local vault's plugin folder before running this command.
+> You must edit the `vaultDir` variable inside the `esbuild.config.mjs` file to point to your local vault's plugin folder (`<YourVault>/.obsidian/plugins/obsidian-theme-engine`) before running this command.
 
 4. **Load into Obsidian:** The compiled files (`main.js`, `styles.css`, `manifest.json`) will be in the project's root. Copy these files into your vault's plugin folder:
 
