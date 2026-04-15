@@ -332,6 +332,9 @@ Each entry below shows:
 
 ## Installation (End User)
 
+> [!IMPORTANT]
+> **Requires Obsidian v1.8.7 or higher.** Please ensure your Obsidian app is updated before installing.
+
 1. Download the latest release from the [GitHub Releases page](https://github.com/YazanAmmar/obsidian-theme-engine/releases).
 2. Extract the plugin folder into your vault's plugins folder: `<YourVault>/.obsidian/plugins/`.
 3. In Obsidian, go to `Settings` -> `Community plugins`.
@@ -563,6 +566,18 @@ A: Snapshots are a safety feature.
 ### Q: Does the plugin support Right-to-Left (RTL) languages?
 
 A: Yes, absolutely. The plugin fully supports **Arabic** (العَرَبيَّةُ) and **Persian** (فارسی). You can find the **Enable Right-to-Left (RTL) Layout** setting near the language dropdown to flip the interface completely for a seamless reading experience.
+
+---
+
+### Q: I used the old Beta version (Color Master). How do I keep my profiles?
+
+A: Because the plugin's official ID changed for the Obsidian store release (`theme-engine`), automatic data migration was disabled to comply with strict security guidelines. To keep your old profiles, perform a quick manual copy:
+
+1. Close Obsidian.
+2. Go to your vault's plugins folder: `.obsidian/plugins/obsidian-color-master/`
+3. Copy the `data.json` file.
+4. Paste it into the new plugin folder: `.obsidian/plugins/obsidian-theme-engine/` (replace the file if asked).
+5. Restart Obsidian.
 
 ---
 

@@ -5,7 +5,7 @@
  * Description: Provides a comprehensive UI to control all Obsidian CSS variables directly,
  * removing the need for Force Mode and expanding customization options.
  */
-import { moment, Notice, Plugin } from 'obsidian';
+import { moment, Plugin } from 'obsidian';
 import { registerCommands } from './commands';
 import {
   applyBackgroundMedia as applyBackgroundMediaCore,
@@ -19,13 +19,6 @@ import {
   setBackgroundMedia as setBackgroundMediaCore,
   setBackgroundMediaFromUrl as setBackgroundMediaFromUrlCore,
 } from './core/background-media';
-import {
-  CURRENT_PLUGIN_ID,
-  LEGACY_PLUGIN_IDS,
-  migrateCommunityPluginListIfNeeded,
-  migrateLegacyHotkeysIfNeeded,
-  migrateLegacyPluginDataIfNeeded,
-} from './core/migrations';
 import {
   pinProfileSnapshot as pinProfileSnapshotCore,
   pushCssHistory as pushCssHistoryCore,
@@ -133,21 +126,6 @@ export default class ThemeEngine extends Plugin {
   restartColorUpdateLoop() {
     this.stopColorUpdateLoop();
     this.startColorUpdateLoop();
-  }
-
-  private async migrateLegacyPluginDataIfNeeded(): Promise<{
-    migrated: boolean;
-    sourcePath?: string;
-  }> {
-    return migrateLegacyPluginDataIfNeeded(this);
-  }
-
-  private async migrateLegacyHotkeysIfNeeded(): Promise<boolean> {
-    return migrateLegacyHotkeysIfNeeded(this);
-  }
-
-  private async migrateCommunityPluginListIfNeeded(): Promise<boolean> {
-    return migrateCommunityPluginListIfNeeded(this);
   }
 
   private supportsRuntimeStyleSheets(): boolean {
@@ -293,44 +271,10 @@ export default class ThemeEngine extends Plugin {
   }
 
   async onload() {
-    const dataMigration = await this.migrateLegacyPluginDataIfNeeded();
-    const hotkeysMigrated = await this.migrateLegacyHotkeysIfNeeded();
-    const communityPluginsMigrated = await this.migrateCommunityPluginListIfNeeded();
-
     await this.loadSettings();
-
-    const migrationHappened = dataMigration.migrated || hotkeysMigrated || communityPluginsMigrated;
-
-    if (migrationHappened) {
-      const sourcePath =
-        dataMigration.sourcePath ||
-        this.settings.idMigration?.sourcePath ||
-        `${this.app.vault.configDir}/plugins/${LEGACY_PLUGIN_IDS[0]}/data.json`;
-
-      this.settings.idMigration = {
-        from: this.settings.idMigration?.from || LEGACY_PLUGIN_IDS[0],
-        to: CURRENT_PLUGIN_ID,
-        at: new Date().toISOString(),
-        sourcePath,
-        hotkeysMigrated,
-        communityPluginsMigrated,
-      };
-
-      await this.saveData(this.settings);
-    }
-
     initializeT(this);
-
-    if (migrationHappened) {
-      const migratedParts: string[] = [];
-      if (dataMigration.migrated) migratedParts.push('settings data');
-      if (hotkeysMigrated) migratedParts.push('hotkeys');
-      if (communityPluginsMigrated) migratedParts.push('enabled plugin list');
-
-      new Notice(`Theme Engine migration completed: ${migratedParts.join(', ')}.`);
-    }
-
     await this._ensureBackgroundsFolderExists();
+
     this.liveNoticeRules = null;
     this.liveNoticeRuleType = null;
     if (this.settings.language === 'auto') {
