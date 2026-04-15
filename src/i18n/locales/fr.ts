@@ -28,8 +28,9 @@
     enablePlugin: 'Activer Maître des Couleurs',
     enablePluginDesc:
       'Désactivez cette option pour désactiver temporairement toutes les couleurs personnalisées et revenir à votre thème Obsidian actif.',
-    language: 'Langue',
-    languageDesc: "Définissez la langue de l'interface pour le plugin.",
+    language: 'Traductions & langues',
+    languageDesc:
+      "La langue de l'interface suit automatiquement Obsidian. Vous pouvez modifier les traductions ou en ajouter de nouvelles ici.",
     languageSettingsModalTitle: 'Paramètres de langue',
     rtlLayoutName: 'Activer la disposition de droite à gauche (RTL)',
     rtlLayoutDesc:
@@ -268,8 +269,7 @@
       backgroundsDesc:
         "Supprime entièrement le dossier des arrière-plans dans le dossier de données de ce plugin, ainsi que tous les médias qu'il contient.",
       settingsLabel: 'Paramètres du plugin',
-      settingsDesc:
-        'Réinitialise la langue, les FPS, la disposition et les autres options par défaut.',
+      settingsDesc: 'Réinitialise les FPS, la disposition et les autres options par défaut.',
       languagesLabel: 'Langues personnalisées',
       languagesDesc: "Supprime toutes les langues personnalisées créées par l'utilisateur.",
     },

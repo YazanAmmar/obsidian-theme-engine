@@ -5,7 +5,7 @@
  * Description: Provides a comprehensive UI to control all Obsidian CSS variables directly,
  * removing the need for Force Mode and expanding customization options.
  */
-import { moment, Plugin } from 'obsidian';
+import { Plugin } from 'obsidian';
 import { registerCommands } from './commands';
 import {
   applyBackgroundMedia as applyBackgroundMediaCore,
@@ -277,21 +277,6 @@ export default class ThemeEngine extends Plugin {
 
     this.liveNoticeRules = null;
     this.liveNoticeRuleType = null;
-    if (this.settings.language === 'auto') {
-      const obsidianLang = moment.locale();
-
-      // Determine the language based on Obsidian's current locale
-      if (obsidianLang === 'ar') {
-        this.settings.language = 'ar';
-      } else if (obsidianLang === 'fa') {
-        this.settings.language = 'fa';
-      } else if (obsidianLang === 'fr') {
-        this.settings.language = 'fr';
-      } else {
-        this.settings.language = 'en'; // The default
-      }
-      await this.saveSettings();
-    }
 
     registerCommands(this);
 

@@ -7,6 +7,7 @@ import {
   Setting,
   TextAreaComponent,
   TextComponent,
+  getLanguage,
 } from 'obsidian';
 import {
   CORE_LOCALES,
@@ -453,7 +454,7 @@ export class LanguageTranslatorModal extends ThemeEngineBaseModal {
     };
     await this.plugin.saveSettings();
 
-    if (this.plugin.settings.language === this.langCode) {
+    if (getLanguage() === this.langCode) {
       loadLanguage(this.plugin.settings);
     }
 

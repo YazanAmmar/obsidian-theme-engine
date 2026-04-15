@@ -1,4 +1,12 @@
-import { ButtonComponent, Notice, Setting, SettingGroup, debounce, setIcon } from 'obsidian';
+import {
+  ButtonComponent,
+  Notice,
+  Setting,
+  SettingGroup,
+  debounce,
+  setIcon,
+  getLanguage,
+} from 'obsidian';
 import { CORE_LANGUAGES, LocaleCode } from '../../i18n/types';
 import { loadLanguage, t } from '../../i18n/strings';
 import type { ThemeEngineSettingTab } from '../settingsTab';
@@ -24,7 +32,7 @@ export const renderSettingsTab = async (tab: ThemeEngineSettingTab): Promise<voi
   containerEl.empty();
   containerEl.classList.add('theme-engine-hidden');
 
-  const langCode = tab.plugin.settings.language;
+  const langCode = getLanguage();
   const customLang = tab.plugin.settings.customLanguages?.[langCode];
   const isCoreRtlLang = langCode === 'ar' || langCode === 'fa';
   const isCustomRtlLang = customLang?.isRtl === true;
@@ -126,7 +134,7 @@ export const renderSettingsTab = async (tab: ThemeEngineSettingTab): Promise<voi
     .setTooltip(t('tooltips.editLang'))
     .setClass('cm-control-icon-button')
     .onClick(() => {
-      const selectedLangCode = tab.plugin.settings.language;
+      const selectedLangCode = getLanguage();
       new LanguageTranslatorModal(tab.app, tab.plugin, tab, selectedLangCode).open();
     });
 
@@ -193,7 +201,6 @@ export const renderSettingsTab = async (tab: ThemeEngineSettingTab): Promise<voi
             void (async () => {
               if (!tab.plugin.settings.customLanguages) return;
               delete tab.plugin.settings.customLanguages[langCode];
-              tab.plugin.settings.language = 'en';
               loadLanguage(tab.plugin.settings);
               await tab.plugin.saveSettings();
               tab.display();
@@ -207,35 +214,6 @@ export const renderSettingsTab = async (tab: ThemeEngineSettingTab): Promise<voi
       });
     deleteBtn.buttonEl.classList.add('cm-control-icon-button');
   }
-
-  languageSetting.addDropdown((dropdown) => {
-    const customLangs = tab.plugin.settings.customLanguages || {};
-
-    for (const code in CORE_LANGUAGES) {
-      let displayName = CORE_LANGUAGES[code as LocaleCode];
-      if (customLangs[code]) {
-        displayName = customLangs[code].languageName;
-      }
-      dropdown.addOption(code, displayName);
-    }
-
-    const customCodes = Object.keys(customLangs);
-    for (const code of customCodes) {
-      if (CORE_LANGUAGES[code as LocaleCode]) continue;
-
-      const langName = customLangs[code].languageName;
-      dropdown.addOption(code, langName);
-    }
-
-    dropdown.setValue(tab.plugin.settings.language);
-    dropdown.onChange(async (value) => {
-      tab.plugin.settings.language = value;
-      loadLanguage(tab.plugin.settings);
-
-      await tab.plugin.saveSettings();
-      tab.display();
-    });
-  });
 
   tab.staticContentContainer = containerEl.createDiv({
     cls: 'cm-static-sections',

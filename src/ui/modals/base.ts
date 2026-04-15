@@ -1,4 +1,4 @@
-import { App, Modal } from 'obsidian';
+import { App, Modal, getLanguage } from 'obsidian';
 import type ThemeEngine from '../../main';
 
 /**
@@ -19,7 +19,7 @@ export class ThemeEngineBaseModal extends Modal {
    * Child classes MUST call super.onOpen() if they override this.
    */
   onOpen() {
-    const langCode = this.plugin.settings.language;
+    const langCode = getLanguage();
     const customLang = this.plugin.settings.customLanguages?.[langCode];
     const isCoreRtlLang = langCode === 'ar' || langCode === 'fa';
     const isCustomRtlLang = customLang?.isRtl === true;

@@ -1,3 +1,4 @@
+import { getLanguage } from 'obsidian';
 import type ThemeEngine from '../main';
 import type { PluginSettings } from '../types';
 import type { LocaleStrings } from './types';
@@ -32,7 +33,7 @@ export function initializeT(plugin: ThemeEngine) {
 
 // Switches the active language map based on settings
 export function loadLanguage(settings: PluginSettings) {
-  const langCode = settings.language as LocaleCode;
+  const langCode = getLanguage() as LocaleCode;
   const customLang = settings.customLanguages?.[langCode];
 
   if (CORE_LOCALES[langCode]) {

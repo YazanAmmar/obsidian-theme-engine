@@ -565,7 +565,7 @@ A: Snapshots are a safety feature.
 
 ### Q: Does the plugin support Right-to-Left (RTL) languages?
 
-A: Yes, absolutely. The plugin fully supports **Arabic** (العَرَبيَّةُ) and **Persian** (فارسی). You can find the **Enable Right-to-Left (RTL) Layout** setting near the language dropdown to flip the interface completely for a seamless reading experience.
+A: Yes, absolutely. The plugin fully supports **Arabic** (العَرَبيَّةُ) and **Persian** (فارسی). You can find the **Enable Right-to-Left (RTL) Layout** setting in the Translations & Languages section...
 
 ---
 

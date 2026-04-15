@@ -1,3 +1,4 @@
+import { getLanguage } from 'obsidian';
 import { DEFAULT_VARS } from '../constants';
 import type ThemeEngine from '../main';
 import { flattenVars, isIconizeEnabled, setCssPropsSafe } from '../utils';
@@ -244,7 +245,7 @@ export const applyStyles = async (plugin: ThemeEngine): Promise<void> => {
   applyCustomCssForProfile(plugin, plugin.settings.activeProfile);
   applyCssSnippets(plugin);
 
-  const langCode = plugin.settings.language;
+  const langCode = getLanguage();
   const customLang = plugin.settings.customLanguages?.[langCode];
   const isCoreRtlLang = langCode === 'ar' || langCode === 'fa';
   const isCustomRtlLang = customLang?.isRtl === true;

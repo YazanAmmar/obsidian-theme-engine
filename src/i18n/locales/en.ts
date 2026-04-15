@@ -28,8 +28,9 @@ export default {
     enablePlugin: 'Enable theme engine',
     enablePluginDesc:
       'Turn this off to temporarily disable all custom colors and revert to your active Obsidian theme.',
-    language: 'Language',
-    languageDesc: 'Set the interface language for the plugin.',
+    language: 'Translations & languages',
+    languageDesc:
+      'The interface language automatically follows Obsidian. You can edit translations or add custom ones here.',
     languageSettingsModalTitle: 'Language settings',
     rtlLayoutName: 'Enable right-to-left (rtl) layout',
     rtlLayoutDesc:
@@ -263,7 +264,7 @@ export default {
       backgroundsDesc:
         "Deletes the entire backgrounds folder inside this plugin's data folder, including all media.",
       settingsLabel: 'Plugin settings',
-      settingsDesc: 'Resets language, fps, layout, and other options to default.',
+      settingsDesc: 'Resets fps, layout, and other options to default.',
       languagesLabel: 'Custom languages',
       languagesDesc: 'Deletes all custom languages created by the user.',
     },

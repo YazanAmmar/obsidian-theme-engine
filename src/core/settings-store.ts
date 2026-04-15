@@ -129,7 +129,6 @@ export const resetPluginData = async (
   const newSettings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS)) as PluginSettings;
 
   if (!options.deleteSettings) {
-    newSettings.language = plugin.settings.language;
     newSettings.useRtlLayout = plugin.settings.useRtlLayout;
     newSettings.overrideIconizeColors = plugin.settings.overrideIconizeColors;
     newSettings.cleanupInterval = plugin.settings.cleanupInterval;
@@ -165,7 +164,6 @@ export const resetPluginData = async (
 
   if (options.deleteSettings) {
     newSettings.advancedResetOptions = plugin.settings.advancedResetOptions;
-    newSettings.language = 'auto';
   }
 
   plugin.settings = newSettings;

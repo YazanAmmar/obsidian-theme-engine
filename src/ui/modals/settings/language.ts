@@ -165,8 +165,6 @@ export class AddNewLanguageModal extends ThemeEngineBaseModal {
       isRtl: this.isRtl,
     };
 
-    this.plugin.settings.language = this.langCode;
-
     await this.plugin.saveSettings();
     loadLanguage(this.plugin.settings); // Re-initialize i18n engine
     new Notice(t('notices.langCreated', this.langName));

@@ -74,7 +74,6 @@ export interface PluginSettings {
   lastScrollPosition?: number;
   noticeRules?: unknown;
   pluginEnabled: boolean;
-  language: string;
   overrideIconizeColors: boolean;
   cleanupInterval: number;
   colorUpdateFPS: number;
