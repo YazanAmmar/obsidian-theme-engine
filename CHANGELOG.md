@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.1.0](https://github.com/YazanAmmar/obsidian-theme-engine/releases/tag/2.1.0) - 2026-05-14
+
+### Added
+
+- Expanded color variable coverage across navigation, links, editor, tables, canvas, tabs, and scrollbar states.
+- Full official callout color support with automatic RGB handling.
+
+### Changed
+
+- Localization now automatically follows Obsidian's active language using native APIs.
+- Background media storage moved into the plugin's local directory.
+- Build system migrated to a dedicated `esbuild.config.mjs` pipeline.
+- Profile navigation and theme toggle commands now use `checkCallback` for improved command palette integration.
+- Updated `minAppVersion` to `1.11.0` for compatibility with required Obsidian APIs.
+- Replaced custom debounce implementations with Obsidian's native API.
+- Simplified CSS scoping and removed unnecessary core UI overrides.
+
+### Fixed
+
+- Resolved an interval-related memory leak affecting plugin performance.
+- Fixed global CSS leakage that could unintentionally affect the core Obsidian interface.
+- Improved Arabic and Persian callout translations.
+
+### Removed
+
+- Removed unsafe `HTMLElement.prototype.setCssProps` monkey-patch.
+- Removed legacy plugin ID migration logic and related system file modification behavior.
+- Removed manual language state management in favor of host application settings.
+
+### Maintenance
+
+- Enabled stricter TypeScript validation and modernized compiler configuration.
+- Separated linting and type-checking into dedicated build steps.
+- Improved local development workflow with automatic build and asset synchronization.
+- Added trademark and visual identity protection documentation.
+
 ## [v2.0.0](https://github.com/YazanAmmar/obsidian-theme-engine/releases/tag/2.0.0) - 2026-02-14
 
 ### Breaking Changes
@@ -37,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed unsafe and unknown type casts.
 - Prevented pinned profile variable reset regressions.
 - ESLint configuration aligned with Obsidian validation standards.
+- Replaced `HTMLElement.prototype.setCssProps` monkey-patch with `setCssPropsSafe`.
 
 ### Removed
 
