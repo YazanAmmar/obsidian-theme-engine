@@ -428,8 +428,8 @@ export default {
     openSettings: 'Open settings tab',
   },
   likeCard: {
-    tagline: 'Theme your Obsidian — edit, save & share color profiles',
-    description: 'Theme engine for Obsidian — control themes & color schemes',
+    tagline: 'Theme your Obsidian - edit, save & share color profiles',
+    description: 'Theme engine for Obsidian - control themes & color schemes',
     profilesAndSnippets: 'Profiles & snippets',
     customizableColors: 'Customizable colors',
     daysOfUse: 'Days of use',

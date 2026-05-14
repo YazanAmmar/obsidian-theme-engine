@@ -440,9 +440,9 @@
   },
   likeCard: {
     tagline:
-      'Personnalisez votre Obsidian — modifiez, enregistrez et partagez vos profils de couleurs',
+      'Personnalisez votre Obsidian - modifiez, enregistrez et partagez vos profils de couleurs',
     description:
-      'Moteur de thèmes pour Obsidian — contrôlez les thèmes et les palettes de couleurs',
+      'Moteur de thèmes pour Obsidian - contrôlez les thèmes et les palettes de couleurs',
     profilesAndSnippets: 'Profils et extraits',
     customizableColors: 'Couleurs personnalisables',
     daysOfUse: "Jours d'utilisation",

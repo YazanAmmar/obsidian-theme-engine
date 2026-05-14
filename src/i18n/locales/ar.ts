@@ -422,8 +422,8 @@ export default {
     openSettings: 'فتح نافذة الإعدادات',
   },
   likeCard: {
-    tagline: 'خصّص ثيم Obsidian الخاص بك — عدّل، احفظ وشارك ملفات الألوان',
-    description: 'Theme Engine لـ Obsidian — تحكّم بالثيمات وأنظمة الألوان',
+    tagline: 'خصّص ثيم Obsidian الخاص بك - عدّل، احفظ وشارك ملفات الألوان',
+    description: 'Theme Engine لـ Obsidian - تحكّم بالثيمات وأنظمة الألوان',
     profilesAndSnippets: 'الملفات ومقتطفات CSS',
     customizableColors: 'ألوان قابلة للتخصيص',
     daysOfUse: 'أيام الاستخدام',
