@@ -1,6 +1,6 @@
 /*
  * Theme Engine - Obsidian Plugin
- * Version: 2.0.0
+ * Version: 2.1.0
  * Author: Yazan Ammar (GitHub : https://github.com/YazanAmmar )
  * Description: Provides a comprehensive UI to control all Obsidian CSS variables directly,
  * removing the need for Force Mode and expanding customization options.

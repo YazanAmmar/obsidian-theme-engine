@@ -1,6 +1,6 @@
 {
   "name": "theme-engine",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Take full control of your workspace with dynamic theme profiles, live overrides, and a powerful customization engine built for complete visual freedom.",
   "main": "main.js",
   "type": "module",

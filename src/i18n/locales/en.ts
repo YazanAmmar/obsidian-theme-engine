@@ -1,6 +1,6 @@
 export default {
   plugin: {
-    name: 'Theme engine - v2.0.0',
+    name: 'Theme engine - v2.1.0',
     ribbonTooltip: 'Theme engine settings',
   },
   buttons: {

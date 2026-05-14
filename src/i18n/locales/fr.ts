@@ -1,6 +1,6 @@
 ﻿export default {
   plugin: {
-    name: 'Maître des Couleurs - v2.0.0',
+    name: 'Maître des Couleurs - v2.1.0',
     ribbonTooltip: 'Paramètres de Theme Engine',
   },
   buttons: {
